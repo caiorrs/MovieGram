@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "moviesTest.app"
-               BlueprintName = "moviesTest"
-               ReferencedContainer = "container:moviesTest.xcodeproj">
+               BuildableName = "MovieGram.app"
+               BlueprintName = "MovieGram"
+               ReferencedContainer = "container:MovieGram.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "moviesTestTests.xctest"
-               BlueprintName = "moviesTestTests"
-               ReferencedContainer = "container:moviesTest.xcodeproj">
+               BuildableName = "MovieGramTests.xctest"
+               BlueprintName = "MovieGramTests"
+               ReferencedContainer = "container:MovieGram.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "moviesTest.app"
-            BlueprintName = "moviesTest"
-            ReferencedContainer = "container:moviesTest.xcodeproj">
+            BuildableName = "MovieGram.app"
+            BlueprintName = "MovieGram"
+            ReferencedContainer = "container:MovieGram.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "moviesTest.app"
-            BlueprintName = "moviesTest"
-            ReferencedContainer = "container:moviesTest.xcodeproj">
+            BuildableName = "MovieGram.app"
+            BlueprintName = "MovieGram"
+            ReferencedContainer = "container:MovieGram.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
