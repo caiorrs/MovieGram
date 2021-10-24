@@ -1,6 +1,6 @@
 import FastImage from 'react-native-fast-image';
 import styled from 'styled-components/native';
-import { heightPercentage, widthPercentage } from '~/utils/responsive';
+import {heightPercentage, widthPercentage} from '~/utils/responsive';
 
 export const Wrapper = styled.TouchableOpacity`
   width: ${widthPercentage(90)}px;
@@ -11,8 +11,12 @@ export const Wrapper = styled.TouchableOpacity`
 
 export const Title = styled.Text`
   font-size: 18px;
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({theme}) => theme.colors.text};
   font-weight: bold;
+  position: absolute;
+  left: 10;
+  bottom: 30;
+  text-transform: uppercase;
 `;
 
 export const Image = styled(FastImage).attrs({

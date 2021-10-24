@@ -1,31 +1,31 @@
 export const HomeStrings = {
-  trending: 'Trending',
-  title: 'Movies',
-  loading: 'Please wait while loading',
-  reload: 'RELOAD',
-  errorMessage: 'Error on getting movies',
-  search: 'Search'
+  trending: 'Recomendados',
+  title: 'Filmes',
+  loading: 'Aguarde enquanto carrega',
+  reload: 'RECARREGAR',
+  errorMessage: 'Erro ao carregar filmes',
+  search: 'Search',
 };
 
 export const DetailStrings = {
-  title: 'Details',
-  loading: 'Please wait while loading',
-  overview: 'Summary',
-  moreInfo: 'More Info',
-  year: 'Year',
-  revenue: 'Revenue',
-  budget: 'Budget',
-  genres: 'Genres',
+  title: 'Detalhes',
+  loading: 'Aguarde enqunato carrega',
+  overview: 'Sinopse',
+  moreInfo: 'Mais informações',
+  year: 'Ano',
+  revenue: 'Receita',
+  budget: 'Orçamento',
+  genres: 'Gêneros',
   website: 'Website',
-  originalTitle: 'Original Title',
+  originalTitle: 'Título original',
   unknown: 'Unknown',
-  duration: 'Runtime',
-  errorMessage: 'Error on getting information about this movie',
-  reload: 'RELOAD',
+  duration: 'Duração',
+  errorMessage: 'Erro ao obter informações deste filme',
+  reload: 'RECARREGAR',
 };
 
 export const SearchStrings = {
-  hint: 'Type something to search',
-  noResults: 'No results found',
-  placeholder: "Wonder Woman, Avengers, Star Wars..."
+  hint: 'Escreva algo para buscar',
+  noResults: 'Nenhum resultado encontrado',
+  placeholder: 'Duna, Vingadores, Star Wars...',
 };

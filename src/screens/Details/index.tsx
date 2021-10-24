@@ -1,12 +1,12 @@
 import moment from 'moment';
 import React, { useState, useEffect, useMemo } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Alert, Image, Text, TouchableOpacity, View } from 'react-native';
 import { VideosList } from '~/components';
 import { useConfiguration } from '~/hooks';
 import { useLanguage } from '~/language';
 import { API } from '~/services';
 import { priceMasker } from '~/utils';
-import type {movieDetailsResponse, movieVideosResponse} from '../../services/types';
+import type {movieDetailsResponse, movieProvidersResponse, movieVideosResponse} from '../../services/types';
 import {
   Wrapper, PosterWrapper, InfoWrapper, PosterTitle, Rating, DetailsWrapper,
   StatsWrapper, StatsTitle, StatsValue, DescriptionWrapper, DescriptionTitle, DescriptionValue,
@@ -17,7 +17,7 @@ const Details = ({ route }) => {
   const { movieId } = route?.params;
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [movieDetails, setMovieDetails] = useState<movieDetailsResponse | null>(null);
+  const [movieDetails, setMovieDetails] = useState<movieDetailsResponse & {providers: movieProvidersResponse} | null>(null);
   const [movieVideos, setMovieVideos] = useState<movieVideosResponse | null>(null);
 
   const { DetailStrings } = useLanguage();
@@ -29,11 +29,13 @@ const Details = ({ route }) => {
     try {
       setIsLoading(true);
       const result = await API.getMovieDetails({ movie_id: movieId });
-      setMovieDetails(result?.data);
+      const providersResult = await API.getMovieProviders({ movie_id: movieId })
+
+      setMovieDetails({...result?.data, providers: {...providersResult.data}});
       setError(null);
       setIsLoading(false);
     } catch (err) {
-      console.warn('Error - ', err.message);
+      // console.warn('Error - ', err.message);
       setError(err.message);
       setIsLoading(false);
     }
@@ -42,10 +44,10 @@ const Details = ({ route }) => {
   const getMovieVideos = async () => {
     try {
       const result = await API.getMovieVideos({ movie_id: movieId });
-      console.warn(result?.data)
+      // console.warn(result?.data)
       setMovieVideos(result?.data);
     } catch (err) {
-      console.warn('Error - ', err.message);
+      // console.warn('Error - ', err.message);
       setMovieVideos(null)
     }
   };
@@ -94,17 +96,27 @@ const Details = ({ route }) => {
         </PosterWrapper>
         <DetailsWrapper>
           <DescriptionWrapper>
+            <DescriptionTitle>Streaming</DescriptionTitle>
+            <View style={{ flexDirection: 'row' }}>
+              {movieDetails?.providers?.results?.BR?.flatrate?.map(provider => {
+                return (
+                  <TouchableOpacity onPress={() => Alert.alert("Redirecionando", `Abrindo ${movieDetails.title} em ${provider.provider_name}`)}>
+                    <Image source={{ uri: `${baseURL}${backdropSize}${provider.logo_path}` }} style={{ height: 40, width: 40, margin: 10 }} />
+                  </TouchableOpacity>
+                  )
+            })}
+              </View>
             <DescriptionTitle>{DetailStrings.overview}</DescriptionTitle>
             <DescriptionValue>{movieDetails?.overview}</DescriptionValue>
           </DescriptionWrapper>
-          <StatsTitle>{DetailStrings.moreInfo}</StatsTitle>
-          {youtubeVideos?.length ? (
+          {/* <StatsTitle>{DetailStrings.moreInfo}</StatsTitle> */}
+          {/* {youtubeVideos?.length ? (
             <VideosList 
               videos={youtubeVideos}
               title="Videos"
             />
-          ) : null}
-          <StatsWrapper>
+          ) : null} */}
+          {/* <StatsWrapper>
             <StatsTitle>{DetailStrings.duration}</StatsTitle>
             <StatsValue>{movieDetails?.runtime} min</StatsValue>
             <StatsTitle>{DetailStrings.year}</StatsTitle>
@@ -123,7 +135,7 @@ const Details = ({ route }) => {
               ) : null}
             <StatsTitle>{DetailStrings.originalTitle}</StatsTitle>
             <StatsValue>{movieDetails?.original_title}</StatsValue>
-          </StatsWrapper>
+          </StatsWrapper> */}
         </DetailsWrapper>
       </Scroll>
     </Wrapper>

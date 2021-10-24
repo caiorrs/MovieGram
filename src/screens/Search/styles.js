@@ -1,9 +1,9 @@
-import styled from 'styled-components/native'
+import styled from 'styled-components/native';
 
 export const Wrapper = styled.View`
   flex: 1;
   padding: 20px;
-  background-color: ${({theme}) => theme.colors.background};
+  background-color: ${({theme}) => theme.colors.lightBackground};
 `;
 
 export const InputWrapper = styled.View`
@@ -27,7 +27,7 @@ export const Input = styled.TextInput`
 export const ResultsWrapper = styled.View``;
 
 export const HintText = styled.Text`
-  color: ${({theme}) => theme.colors.text};
+  color: ${({theme}) => theme.colors.background};
   text-align: center;
   padding-vertical: 10px;
   font-size: 16px;
@@ -35,7 +35,7 @@ export const HintText = styled.Text`
 `;
 
 export const NoResultsText = styled.Text`
-  color: ${({theme}) => theme.colors.text};
+  color: ${({theme}) => theme.colors.background};
   text-align: center;
   padding-vertical: 10px;
   font-size: 16px;

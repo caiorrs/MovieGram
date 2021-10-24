@@ -1,11 +1,14 @@
 export type trendingType = {
   time_window: "day" | "week",
   media_type: "all" | "movie" | "tv" | "person"
+  language: string
 }
 
 export type searchType = {
   query: string;
   page: Number;
+  language: string
+
 }
 
 export type discoverType = {
@@ -144,4 +147,24 @@ export type videosResponse = {
 export type movieVideosResponse = {
   id: number;
   results: Array<videosResponse>
+}
+
+export type movieProvidersResponse = {
+  id: number
+  results: {
+    BR: {
+    link: string
+    flatrate: {
+      logo_path: string
+      provider_name: string
+    }[]
+    rent: {
+      logo_path: string
+      provider_name: string
+    }[]
+    buy: {
+      logo_path: string
+      provider_name: string
+    }[]
+  }}
 }
