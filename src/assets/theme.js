@@ -1,6 +1,7 @@
 const theme = {
   colors: {
     background: '#212121',
+    tabBar: '#444444',
     lightBackground: '#fff',
     darkText: '#212121',
     text: '#FFFFFF',

@@ -2,17 +2,24 @@ export const Types = {
   FETCH_CONFIGURATION: 'APP/FETCH_CONFIGURATION',
   SET_CONFIGURATION: 'APP/SET_CONFIGURATION',
   FAILED_CONFIGURATION: 'APP/FAILED_CONFIGURATION',
+  SET_ISLOGGED: 'APP/SET_ISLOGGED',
 };
 
 const initialState = {
   configuration: null,
   loading: false,
   error: null,
+  isLogged: false,
 };
 
 export const setConfiguration = (configuration) => ({
   type: Types.SET_CONFIGURATION,
   configuration,
+});
+
+export const setIsLogged = (isLogged) => ({
+  type: Types.SET_ISLOGGED,
+  isLogged,
 });
 
 export const fetchConfiguration = () => ({
@@ -27,12 +34,17 @@ const AppReducer = (state = initialState, action) => {
   switch (action.type) {
     case Types.SET_CONFIGURATION:
       return {
-        ...state, configuration: action.configuration, loading: false, error: null,
+        ...state,
+        configuration: action.configuration,
+        loading: false,
+        error: null,
       };
     case Types.FETCH_CONFIGURATION:
-      return { ...state, loading: true, error: null };
+      return {...state, loading: true, error: null};
     case Types.FAILED_CONFIGURATION:
-      return { ...state, error: action.error, loading: false };
+      return {...state, error: action.error, loading: false};
+    case Types.SET_ISLOGGED:
+      return {...state, isLogged: action.isLogged};
     default:
       return state;
   }
