@@ -13,7 +13,7 @@ import {
   ReloadLabel,
   SearchText,
 } from './styles';
-import type {discoverType} from '~/services/types';
+import {discoverType} from '~/services/types';
 import {MoviesBanner, MoviesList} from '~/components';
 import {API} from '~/services';
 import {useLanguage} from '~/language';
@@ -132,6 +132,7 @@ const Home = () => {
           )?.name;
           return (
             <MoviesList
+              key={genre.id}
               movies={genre?.result?.results}
               title={genreName}
               onEndReached={handleOnEndReached}

@@ -1,19 +1,40 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import {Label, OptionsWrapper, Title, Touchable, Wrapper} from './styles';
+
 import {Button} from '~/components';
+import React from 'react';
+import {setIsLogged} from '~/store/ducks/app';
+import {useDispatch} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
 
 const Settings = () => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const onLogout = () => {
-    console.warn('Will logout');
+    dispatch(setIsLogged(false));
+  };
+
+  const onServices = () => {
+    navigation.navigate('Services');
+  };
+
+  const onFriends = () => {
+    navigation.navigate('Friends');
   };
 
   return (
-    <View>
-      <Text>Configurações</Text>
-      <Text>Serviços que assino</Text>
-      <Text>Amigos</Text>
+    <Wrapper>
+      <Title>Configurações</Title>
+      <OptionsWrapper>
+        <Touchable onPress={onServices}>
+          <Label>Serviços que assino</Label>
+        </Touchable>
+        <Touchable onPress={onFriends}>
+          <Label>Amigos</Label>
+        </Touchable>
+      </OptionsWrapper>
       <Button label="SAIR" onPress={onLogout} />
-    </View>
+    </Wrapper>
   );
 };
 

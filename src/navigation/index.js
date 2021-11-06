@@ -1,10 +1,12 @@
-import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
 import * as Screens from '~/screens';
-import theme from '~/assets/theme';
-import {stackFromBottomOverlay} from './styles';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
 import {FeedIcon, ProfileIcon, RecommendedIcon} from '~/assets/icons';
+
+import React from 'react';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
+import {stackFromBottomOverlay} from './styles';
+import theme from '~/assets/theme';
 import {useSelector} from 'react-redux';
 
 const Stack = createStackNavigator();
@@ -46,12 +48,9 @@ const ModalStack = () => {
         <>
           <Stack.Screen name="SignIn" component={Screens.SignIn} />
           <Stack.Screen name="SignUp" component={Screens.SignUp} />
-          <Stack.Screen
-            name="SignUpSuccess"
-            component={Screens.SignUpSuccess}
-          />
         </>
       ) : null}
+      <Stack.Screen name="SignUpSuccess" component={Screens.SignUpSuccess} />
       <Stack.Screen name="SearchStack" component={SearchStack} />
     </Stack.Navigator>
   );
@@ -113,7 +112,16 @@ const TabNav = () => {
 
 const FeedStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: theme.colors.background,
+        },
+        headerTintColor: theme.colors.accent,
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}>
       <Stack.Screen name="Feed" component={Screens.Feed} />
     </Stack.Navigator>
   );
@@ -121,10 +129,19 @@ const FeedStack = () => {
 
 const ProfileStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: theme.colors.background,
+        },
+        headerTintColor: theme.colors.accent,
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}>
       <Stack.Screen name="Profile" component={Screens.Profile} />
-      {/* <Stack.Screen name="Services" component={Screens.ServicesSettings} /> */}
-      {/* <Stack.Screen name="Friends" component={Screens.FriendsSettings} /> */}
+      <Stack.Screen name="Services" component={Screens.ServicesSettings} />
+      <Stack.Screen name="Friends" component={Screens.FriendsSettings} />
     </Stack.Navigator>
   );
 };

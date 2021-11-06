@@ -1,11 +1,12 @@
+import {Button, Input} from '~/components';
+import {Image, Pressable, View} from 'react-native';
 import React, {useState} from 'react';
-import {Pressable, Image, View} from 'react-native';
-import {Input, Button} from '~/components';
-import {Wrapper, SignUp, Title, Subtitle, Scroll} from './styles';
+import {Scroll, SignUp, Subtitle, Title, Wrapper} from './styles';
+
 import Cinema from '~/assets/images/cinema.png';
-import {useNavigation} from '@react-navigation/native';
-import {useDispatch} from 'react-redux';
 import {setIsLogged} from '~/store/ducks/app';
+import {useDispatch} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
 
 const SignIn = () => {
   const navigation = useNavigation();
@@ -55,7 +56,7 @@ const SignIn = () => {
             <Input
               placeholder={'Usuário'}
               value={username}
-              setValue={setUsername}
+              setValue={(name) => setUsername(name.toLowerCase())}
             />
             <Input
               placeholder={'Senha'}

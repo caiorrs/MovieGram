@@ -1,11 +1,12 @@
+import {Button, Input} from '~/components';
+import {Image, Pressable, View} from 'react-native';
 import React, {useState} from 'react';
-import {Pressable, Image, View} from 'react-native';
-import {Input, Button} from '~/components';
-import {Wrapper, Title, Subtitle, Scroll} from './styles';
+import {Scroll, Subtitle, Title, Wrapper} from './styles';
+
 import Cinema from '~/assets/images/cinema.png';
-import {useNavigation} from '@react-navigation/native';
-import {useDispatch} from 'react-redux';
 import {setIsLogged} from '~/store/ducks/app';
+import {useDispatch} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
 
 const SignUp = () => {
   const navigation = useNavigation();
@@ -17,7 +18,8 @@ const SignUp = () => {
   const [error, setError] = useState(null);
 
   const onEnter = () => {
-    navigation.navigate('SignUpSuccess');
+    dispatch(setIsLogged(true));
+    // navigation.navigate('SignUpSuccess');
     // if (username === '' || password === '' || password !== repeatPassword)
     //   setError(new Error('Nome e/ou senha incorretos'));
   };
@@ -44,7 +46,7 @@ const SignUp = () => {
         <Input
           placeholder={'Usuário'}
           value={username}
-          setValue={setUsername}
+          setValue={(name) => setUsername(name.toLowerCase())}
         />
         <View style={{marginTop: 20, width: '100%', alignItems: 'center'}}>
           <Input

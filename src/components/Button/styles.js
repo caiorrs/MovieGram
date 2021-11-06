@@ -16,5 +16,5 @@ export const Label = styled.Text`
   color: ${({theme}) => theme.colors.accent};
   font-size: 18px;
   font-weight: bold;
-  letter-spacing: 0.1;
+  letter-spacing: 0.1px;
 `;
