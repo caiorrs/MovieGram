@@ -10,7 +10,9 @@ export const Wrapper = styled.View`
 
 export const OptionsWrapper = styled.View`
   padding-top: 50px;
+  padding-left: 20px;
   flex: 1;
+  width: 100%;
 `;
 
 export const Title = styled.Text`
@@ -26,5 +28,5 @@ export const Touchable = styled.Pressable`
 
 export const Label = styled.Text`
   color: ${({theme}) => theme.colors.text};
-  font-size: 36px;
+  font-size: 28px;
 `;

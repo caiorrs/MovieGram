@@ -26,12 +26,12 @@ const RecommendedStack = () => (
     <Stack.Screen
       name="Home"
       component={Screens.Home}
-      options={({route}) => ({title: route?.params?.name || 'Home'})}
+      options={({route}) => ({title: route?.params?.name || 'Recomendados'})}
     />
     <Stack.Screen
       name="Details"
       component={Screens.Details}
-      options={({route}) => ({title: route?.params?.name || 'Details'})}
+      options={({route}) => ({title: route?.params?.name || 'Detalhes'})}
     />
   </Stack.Navigator>
 );

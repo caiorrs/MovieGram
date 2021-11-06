@@ -52,7 +52,7 @@ const SignIn = () => {
           }}>
           <Title>Faça o login para acessar o</Title>
           <Subtitle>MovieGram</Subtitle>
-          <View style={{width: '100%', alignItems: 'center'}}>
+          <View style={{width: '100%', alignItems: 'center', paddingTop: 20}}>
             <Input
               placeholder={'Usuário'}
               value={username}

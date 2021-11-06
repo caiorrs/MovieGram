@@ -7,3 +7,4 @@ export {default as CheckMarkIcon} from './checkmark.svg';
 export {default as BoxChecked} from './box_checked.svg';
 export {default as BoxUnchecked} from './box_unchecked.svg';
 export {default as Remove} from './remove.svg';
+export {default as Star} from './star.svg';

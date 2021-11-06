@@ -1,17 +1,29 @@
+import { ActivityIndicator, Alert, Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  DescriptionTitle,
+  DescriptionValue,
+  DescriptionWrapper,
+  DetailsWrapper,
+  ErrorText,
+  InfoWrapper,
+  PosterTitle,
+  PosterWrapper,
+  RateButton,
+  RateLabel,
+  ReloadLabel,
+  Scroll,
+  Touchable,
+  Wrapper
+} from './styles';
+import React, { useEffect, useMemo, useState } from 'react';
+import type {movieDetailsResponse, movieProvidersResponse, movieVideosResponse} from '../../services/types';
+
+import { API } from '~/services';
+import { RatingStars } from '~/components';
 import moment from 'moment';
-import React, { useState, useEffect, useMemo } from 'react';
-import { ActivityIndicator, Alert, Image, Text, TouchableOpacity, View } from 'react-native';
-import { VideosList } from '~/components';
+import { priceMasker } from '~/utils';
 import { useConfiguration } from '~/hooks';
 import { useLanguage } from '~/language';
-import { API } from '~/services';
-import { priceMasker } from '~/utils';
-import type {movieDetailsResponse, movieProvidersResponse, movieVideosResponse} from '../../services/types';
-import {
-  Wrapper, PosterWrapper, InfoWrapper, PosterTitle, Rating, DetailsWrapper,
-  StatsWrapper, StatsTitle, StatsValue, DescriptionWrapper, DescriptionTitle, DescriptionValue,
-  Scroll, ErrorText, Touchable, ReloadLabel,
-} from './styles';
 
 const Details = ({ route }) => {
   const { movieId } = route?.params;
@@ -19,6 +31,7 @@ const Details = ({ route }) => {
   const [error, setError] = useState<string | null>(null);
   const [movieDetails, setMovieDetails] = useState<movieDetailsResponse & {providers: movieProvidersResponse} | null>(null);
   const [movieVideos, setMovieVideos] = useState<movieVideosResponse | null>(null);
+  const [showRatingField, setShowRatingField] = useState(false)
 
   const { DetailStrings } = useLanguage();
 
@@ -64,7 +77,9 @@ const Details = ({ route }) => {
     if(movieDetails) getMovieVideos()
   }, [movieDetails])
 
-  const movieGenres = useMemo(() => movieDetails?.genres?.map((genre) => genre?.name).join(', '), [movieDetails]);
+  const providers = useMemo(() => {
+    return movieDetails?.providers?.results?.BR?.flatrate || []
+  }, [movieDetails])
 
   if (isLoading) {
     return (
@@ -85,58 +100,63 @@ const Details = ({ route }) => {
     );
   }
 
-  return (
-    <Wrapper>
-      <Scroll stickyHeaderIndices={[0]} showsVerticalScrollIndicator={false}>
-        <PosterWrapper source={{ uri: `${baseURL}${backdropSize}${movieDetails?.backdrop_path || movieDetails?.poster_path}` }}>
-          <InfoWrapper>
-            <PosterTitle>{movieDetails?.title}</PosterTitle>
-            <Rating>{`${movieDetails?.vote_average.toFixed(1)} / 10`}</Rating>
-          </InfoWrapper>
-        </PosterWrapper>
-        <DetailsWrapper>
+  const renderRatingField = () => {
+    return (
+      <View style={{ alignItems: 'center' }}>
+        <View style={{marginVertical: 20}}>
+          <RatingStars rating={3} />
+        </View>
+        <TextInput
+          multiline
+          style={{ height: 200, width: "90%", backgroundColor: 'white', borderRadius: 20, padding: 20, paddingTop: 20 }}
+        />
+        <Touchable onPress={() => setShowRatingField(false)}>
+          <DescriptionValue>Voltar</DescriptionValue>
+        </Touchable>
+      </View>
+    )
+  }
+
+  const renderDetails = () => {
+    return (
+        <>
+          <RateButton onPress={() => setShowRatingField(true)} hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}>
+            <RateLabel>AVALIAR</RateLabel>
+          </RateButton>
           <DescriptionWrapper>
+            {providers.length ? (
+              <>
             <DescriptionTitle>Streaming</DescriptionTitle>
             <View style={{ flexDirection: 'row' }}>
-              {movieDetails?.providers?.results?.BR?.flatrate?.map(provider => {
+              {providers?.map(provider => {
                 return (
-                  <TouchableOpacity onPress={() => Alert.alert("Redirecionando", `Abrindo ${movieDetails.title} em ${provider.provider_name}`)}>
+                  <TouchableOpacity key={provider.provider_name} onPress={() => Alert.alert("Redirecionando", `Abrindo ${movieDetails.title} em ${provider.provider_name}`)}>
                     <Image source={{ uri: `${baseURL}${backdropSize}${provider.logo_path}` }} style={{ height: 40, width: 40, margin: 10 }} />
                   </TouchableOpacity>
                   )
             })}
-              </View>
+                </View>
+              </>) : null}
             <DescriptionTitle>{DetailStrings.overview}</DescriptionTitle>
             <DescriptionValue>{movieDetails?.overview}</DescriptionValue>
           </DescriptionWrapper>
-          {/* <StatsTitle>{DetailStrings.moreInfo}</StatsTitle> */}
-          {/* {youtubeVideos?.length ? (
-            <VideosList 
-              videos={youtubeVideos}
-              title="Videos"
-            />
-          ) : null} */}
-          {/* <StatsWrapper>
-            <StatsTitle>{DetailStrings.duration}</StatsTitle>
-            <StatsValue>{movieDetails?.runtime} min</StatsValue>
-            <StatsTitle>{DetailStrings.year}</StatsTitle>
-            <StatsValue>{moment(movieDetails?.release_date).format('YYYY')}</StatsValue>
-            <StatsTitle>{DetailStrings.revenue}</StatsTitle>
-            <StatsValue>{priceMasker(movieDetails?.revenue)}</StatsValue>
-            <StatsTitle>{DetailStrings.budget}</StatsTitle>
-            <StatsValue>{!movieDetails?.budget ? DetailStrings.unknown : priceMasker(movieDetails?.budget)}</StatsValue>
-            <StatsTitle>{DetailStrings.genres}</StatsTitle>
-            <StatsValue>{movieGenres}</StatsValue>
-            {movieDetails?.homepage ? (
-              <>
-                <StatsTitle>{DetailStrings.website}</StatsTitle>
-                <StatsValue>{movieDetails?.homepage}</StatsValue>
-              </>
-              ) : null}
-            <StatsTitle>{DetailStrings.originalTitle}</StatsTitle>
-            <StatsValue>{movieDetails?.original_title}</StatsValue>
-          </StatsWrapper> */}
-        </DetailsWrapper>
+        <RatingStars rating={(movieDetails?.vote_average || 0) / 2} />
+        </>
+    )
+  }
+
+  return (
+    <Wrapper>
+      <Scroll stickyHeaderIndices={[0]} showsVerticalScrollIndicator={false} style={{width: '100%'}}>
+        <PosterWrapper source={{ uri: `${baseURL}${backdropSize}${movieDetails?.backdrop_path || movieDetails?.poster_path}` }}>
+          <InfoWrapper>
+            <PosterTitle>{movieDetails?.title}</PosterTitle>
+            {/* <Rating>{`${movieDetails?.vote_average.toFixed(1)} / 10`}</Rating> */}
+          </InfoWrapper>
+        </PosterWrapper>
+        <DetailsWrapper>
+          {showRatingField ? renderRatingField() : renderDetails()}
+          </DetailsWrapper>
       </Scroll>
     </Wrapper>
   );

@@ -1,6 +1,6 @@
-import styled from 'styled-components/native';
 import FastImage from 'react-native-fast-image';
 import {heightPercentage} from '~/utils/responsive';
+import styled from 'styled-components/native';
 
 export const Wrapper = styled.View`
   flex: 1;
@@ -101,4 +101,18 @@ export const ReloadLabel = styled.Text`
   color: ${({theme}) => theme.colors.text};
   font-size: 18px;
   font-weight: bold;
+`;
+
+export const RateButton = styled.Pressable`
+  background-color: ${({theme}) => theme.colors.text};
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  padding-vertical: 5px;
+  padding-horizontal: 10px;
+  align-self: flex-end;
+`;
+
+export const RateLabel = styled.Text`
+  color: ${({theme}) => theme.colors.accent};
 `;

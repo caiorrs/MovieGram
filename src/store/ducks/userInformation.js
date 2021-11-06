@@ -1,5 +1,7 @@
 export const Types = {
   SET_SERVICES: 'USER/SET_SERVICES',
+  FOLLOW_USER: 'USER/FOLLOW_USER',
+  UNFOLLOW_USER: 'USER/UNFOLLOW_USER',
 };
 
 const initialStreamingServices = [
@@ -30,13 +32,39 @@ const initialStreamingServices = [
   },
 ];
 
+const initialFollowingUsers = [
+  {
+    username: 'Caio',
+    ratings: 97,
+  },
+  {
+    username: 'Rodrigo',
+    ratings: 98,
+  },
+  {
+    username: 'Rafael',
+    ratings: 99,
+  },
+];
+
 const initialState = {
   streamingServices: initialStreamingServices,
+  followingUsers: initialFollowingUsers,
 };
 
 export const setServices = (serviceId) => ({
   type: Types.SET_SERVICES,
   serviceId,
+});
+
+export const unfollowUser = (username) => ({
+  type: Types.UNFOLLOW_USER,
+  username,
+});
+
+export const followUser = (user) => ({
+  type: Types.FOLLOW_USER,
+  user,
 });
 
 const UserInformationReducer = (state = initialState, action) => {
@@ -50,6 +78,20 @@ const UserInformationReducer = (state = initialState, action) => {
           }
           return service;
         }),
+      };
+    case Types.FOLLOW_USER:
+      return {
+        ...state,
+        followingUsers: [...state.followingUsers, action.user],
+      };
+    case Types.UNFOLLOW_USER:
+      return {
+        ...state,
+        followingUsers: [
+          ...state.followingUsers.filter(
+            (user) => user.username !== action.username,
+          ),
+        ],
       };
     default:
       return state;
