@@ -1,25 +1,26 @@
-import React, {useEffect, useState} from 'react';
-import {ActivityIndicator} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
-import {useNavigation} from '@react-navigation/native';
 import {
-  Wrapper,
-  Scroll,
-  Title,
-  HeaderWrapper,
-  Touchable,
-  IconWrapper,
   ErrorText,
+  HeaderWrapper,
+  IconWrapper,
   ReloadLabel,
+  Scroll,
   SearchText,
+  Title,
+  Touchable,
+  Wrapper,
 } from './styles';
-import {discoverType} from '~/services/types';
 import {MoviesBanner, MoviesList} from '~/components';
-import {API} from '~/services';
-import {useLanguage} from '~/language';
+import React, {useEffect, useState} from 'react';
 import {fetchGenres, fetchTrending, setByGenre} from '~/store/ducks/movies';
+import {useDispatch, useSelector} from 'react-redux';
+
+import {API} from '~/services';
+import {ActivityIndicator} from 'react-native';
 import {SearchIcon} from '~/assets/icons';
+import {discoverType} from '~/services/types';
 import theme from '~/assets/theme';
+import {useLanguage} from '~/language';
+import {useNavigation} from '@react-navigation/native';
 
 const Home = () => {
   const {loading: configLoading} = useSelector((state) => state.AppReducer);
@@ -87,13 +88,13 @@ const Home = () => {
   };
 
   const onPressSearch = () => {
-    navigation.navigate('Search');
+    navigation.navigate('SearchStack', {screen: 'Search'});
   };
 
   if (configLoading || loadingTrending || loadingGenres) {
     return (
       <Wrapper>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size="large" color={theme.colors.accent} />
       </Wrapper>
     );
   }
@@ -160,7 +161,7 @@ const Home = () => {
             borderRadius: 50,
             backgroundColor: theme.colors.accent,
           }}>
-          <SearchIcon height={30} width={30} color={theme.colors.background} />
+          <SearchIcon height={40} width={40} color={theme.colors.background} />
         </Touchable>
       </IconWrapper>
     </Wrapper>

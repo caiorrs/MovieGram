@@ -31,8 +31,8 @@ export const Touchable = styled.TouchableOpacity``;
 
 export const IconWrapper = styled.View`
   position: absolute;
-  bottom: 30;
-  right: 30;
+  bottom: 30px;
+  right: 30px;
 `;
 
 export const ErrorText = styled.Text`

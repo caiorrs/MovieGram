@@ -1,5 +1,5 @@
 export const HomeStrings = {
-  trending: 'Recomendados',
+  trending: 'Em Alta',
   title: 'Filmes',
   loading: 'Aguarde enquanto carrega',
   reload: 'RECARREGAR',

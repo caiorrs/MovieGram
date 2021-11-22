@@ -10,20 +10,20 @@ import {useNavigation} from '@react-navigation/native';
 
 const SignIn = () => {
   const navigation = useNavigation();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState(__DEV__ ? 'admin' : '');
+  const [password, setPassword] = useState(__DEV__ ? 'admin' : '');
   const dispatch = useDispatch();
 
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 
   const onEnter = () => {
     if (username === 'admin' && password === 'admin') {
-      setError(null);
+      setError('');
       dispatch(setIsLogged(true));
       return;
     }
 
-    setError(new Error('Nome e/ou senha incorretos'));
+    setError('Nome e/ou senha incorretos');
     return;
   };
 
@@ -53,6 +53,7 @@ const SignIn = () => {
           <Title>Faça o login para acessar o</Title>
           <Subtitle>MovieGram</Subtitle>
           <View style={{width: '100%', alignItems: 'center', paddingTop: 20}}>
+            {error.length ? <SignUp>{error}</SignUp> : null}
             <Input
               placeholder={'Usuário'}
               value={username}
@@ -64,8 +65,6 @@ const SignIn = () => {
               value={password}
               setValue={setPassword}
             />
-
-            {error ? <SignUp>{error.message}</SignUp> : null}
           </View>
           <Pressable
             style={{marginVertical: 10}}
@@ -74,7 +73,7 @@ const SignIn = () => {
           </Pressable>
         </View>
       </Scroll>
-      <View style={{width: '100%', alignItems: 'center', marginVertical: 20}}>
+      <View style={{width: '100%', alignItems: 'center'}}>
         <Button label="ENTRAR" onPress={onEnter} />
       </View>
     </Wrapper>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.View`
   background-color: ${({theme}) => theme.colors.background};
   flex: 1;
-  padding-bottom: 50px;
+  padding-bottom: 10px;
 `;
 
 export const Scroll = styled(KeyboardAwareScrollView)`

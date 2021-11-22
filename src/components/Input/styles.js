@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const Wrapper = styled.View`
   background-color: ${({theme}) => theme.colors.text};
   width: 90%;
-  margin-vertical: 10;
-  border-radius: 10;
+  margin-vertical: 10px;
+  border-radius: 10px;
 `;
 
 export const TextInput = styled.TextInput`

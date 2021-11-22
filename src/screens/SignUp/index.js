@@ -63,12 +63,19 @@ const SignUp = () => {
           />
           {error ? <SignUp>{error.message}</SignUp> : null}
         </View>
-      </Scroll>
-      <View>
-        <View style={{width: '100%', alignItems: 'center', marginVertical: 20}}>
+        <View
+          style={{
+            width: '100%',
+            alignItems: 'center',
+            marginVertical: 20,
+          }}>
           <Button label="CADASTRAR" onPress={onEnter} />
         </View>
-      </View>
+      </Scroll>
+      {/* <View>
+        <View style={{width: '100%', alignItems: 'center', marginVertical: 20}}>
+        </View>
+      </View> */}
     </Wrapper>
   );
 };

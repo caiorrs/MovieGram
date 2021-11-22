@@ -37,7 +37,7 @@ const Services = () => {
           extraData={streamingServices}
           renderItem={renderItem}
           keyExtractor={keyExtractor}
-          contentContainerStyle={{width: '100%'}}
+          contentContainerStyle={{width: '100%', paddingBottom: 100}}
         />
       </View>
     </Wrapper>

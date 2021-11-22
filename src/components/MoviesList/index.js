@@ -1,18 +1,18 @@
 import React from 'react';
 import {
-  Wrapper, TitleWrapper, Title, ListWrapper, List, ItemWrapper,
+  Wrapper,
+  TitleWrapper,
+  Title,
+  ListWrapper,
+  List,
+  ItemWrapper,
 } from './styles';
 import MoviesListItem from './MoviesListItem';
 
-const MoviesList = ({
-  title, movies, onEndReached, onChooseMovie, genreId,
-}) => {
-  const renderItem = ({ item: movie }) => (
+const MoviesList = ({title, movies, onEndReached, onChooseMovie, genreId}) => {
+  const renderItem = ({item: movie}) => (
     <ItemWrapper key={movie?.id}>
-      <MoviesListItem
-        movie={movie}
-        onSelectMovie={onChooseMovie}
-      />
+      <MoviesListItem movie={movie} onSelectMovie={onChooseMovie} />
     </ItemWrapper>
   );
 

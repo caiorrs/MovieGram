@@ -1,36 +1,16 @@
+import {providers} from '~/assets/mocks/providers';
+
 export const Types = {
   SET_SERVICES: 'USER/SET_SERVICES',
   FOLLOW_USER: 'USER/FOLLOW_USER',
   UNFOLLOW_USER: 'USER/UNFOLLOW_USER',
 };
 
-const initialStreamingServices = [
-  {
-    name: 'Netflix',
-    selected: false,
-    id: 0,
-  },
-  {
-    name: 'Disney+',
-    selected: false,
-    id: 1,
-  },
-  {
-    name: 'Amazon Prime',
-    selected: false,
-    id: 2,
-  },
-  {
-    name: 'HBO',
-    selected: false,
-    id: 3,
-  },
-  {
-    name: 'Globoplay',
-    selected: false,
-    id: 4,
-  },
-];
+const initialStreamingServices = providers.map((provider, index) => ({
+  id: index,
+  name: provider,
+  selected: false,
+}));
 
 const initialFollowingUsers = [
   {

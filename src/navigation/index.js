@@ -58,7 +58,7 @@ const ModalStack = () => {
 
 const SearchStack = () => {
   return (
-    <Stack.Navigator mode="modal">
+    <Stack.Navigator mode="modal" headerMode="none">
       <Stack.Screen
         name="Search"
         component={Screens.Search}
@@ -74,6 +74,7 @@ const TabNav = () => {
       tabBarOptions={{
         activeTintColor: theme.colors.accent,
         inactiveTintColor: theme.colors.text,
+        keyboardHidesTabBar: true,
         tabStyle: {
           backgroundColor: theme.colors.tabBar,
         },
@@ -130,6 +131,7 @@ const FeedStack = () => {
 const ProfileStack = () => {
   return (
     <Stack.Navigator
+      headerMode="none"
       screenOptions={{
         headerStyle: {
           backgroundColor: theme.colors.background,

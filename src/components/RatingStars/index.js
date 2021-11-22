@@ -1,22 +1,25 @@
-import React, {useContext} from 'react';
-import {Text, View} from 'react-native';
+import {Pressable, Text, View} from 'react-native';
 
+import React from 'react';
 import {Star} from '~/assets/icons';
-import {ThemeContext} from 'styled-components';
+import theme from '~/assets/theme';
 
 const RatingStars = ({rating, onPress}) => {
-  const {theme} = useContext(ThemeContext);
-
   return (
     <View style={{flexDirection: 'row'}}>
       {[1, 2, 3, 4, 5].map((star) => {
         return (
-          <Star
+          <Pressable
+            onPress={() => onPress?.(star)}
             key={star}
-            color={star <= rating ? 'red' : 'white'}
-            height={40}
-            width={40}
-          />
+            style={{paddingHorizontal: 5}}>
+            <Star
+              key={star}
+              color={star <= rating ? theme.colors.accent : 'white'}
+              height={40}
+              width={40}
+            />
+          </Pressable>
         );
       })}
     </View>

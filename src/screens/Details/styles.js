@@ -116,3 +116,13 @@ export const RateButton = styled.Pressable`
 export const RateLabel = styled.Text`
   color: ${({theme}) => theme.colors.accent};
 `;
+
+export const ProviderWarning = styled.Text`
+  color: ${({theme}) => theme.colors.text};
+`;
+
+export const RatingTitle = styled.Text`
+  color: ${({theme}) => theme.colors.text};
+  font-size: 18px;
+  font-weight: bold;
+`;
