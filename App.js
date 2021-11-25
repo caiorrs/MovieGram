@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
-import {StatusBar} from 'react-native';
+import {LogBox, StatusBar} from 'react-native';
 import {ThemeProvider} from 'styled-components';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {Provider} from 'react-redux';
@@ -14,6 +14,8 @@ import {fetchGenres, fetchTrending} from '~/store/ducks/movies';
 if (__DEV__) {
   import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
 }
+
+LogBox.ignoreAllLogs(true);
 
 const App = () => {
   useEffect(() => {

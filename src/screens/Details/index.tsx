@@ -54,10 +54,10 @@ const Details = ({route}) => {
   const [userRating, setUserRating] = useState(3);
 
   const userStreamingServices = useSelector(
-    (state) => state.UserInformationReducer.streamingServices,
+    state => state.UserInformationReducer.streamingServices,
   )
-    ?.filter((streamingService) => streamingService.selected)
-    ?.map((item) => item.name);
+    ?.filter(streamingService => streamingService.selected)
+    ?.map(item => item.name);
 
   const {DetailStrings} = useLanguage();
 
@@ -108,7 +108,7 @@ const Details = ({route}) => {
   }, [movieDetails]);
 
   const providerWarning = useMemo(() => {
-    const hasStreaming = providers?.some((item) =>
+    const hasStreaming = providers?.some(item =>
       userStreamingServices?.includes(item?.provider_name),
     );
 
@@ -145,20 +145,25 @@ const Details = ({route}) => {
     return (
       <View style={{alignItems: 'center'}}>
         <View style={{marginVertical: 20}}>
+          <Text style={{color: theme.colors.accent}}>Sua avaliação</Text>
           <RatingStars rating={userRating} onPress={setUserRating} />
         </View>
-        <TextInput
-          multiline
-          style={{
-            height: 200,
-            width: '90%',
-            backgroundColor: 'white',
-            borderRadius: 20,
-            padding: 20,
-            paddingTop: 20,
-            textAlignVertical: 'top',
-          }}
-        />
+        <View style={{width: '100%'}}>
+          <Text style={{color: theme.colors.accent}}>Comentário</Text>
+          <TextInput
+            multiline
+            style={{
+              height: 200,
+              width: '90%',
+              backgroundColor: 'white',
+              borderRadius: 20,
+              padding: 20,
+              paddingTop: 20,
+              textAlignVertical: 'top',
+              color: '#000',
+            }}
+          />
+        </View>
         <Touchable onPress={() => setShowRatingField(false)}>
           <DescriptionValue>Voltar</DescriptionValue>
         </Touchable>
@@ -182,7 +187,7 @@ const Details = ({route}) => {
             <>
               <DescriptionTitle>Streaming</DescriptionTitle>
               <View style={{flexDirection: 'row'}}>
-                {providers?.map((provider) => {
+                {providers?.map(provider => {
                   return (
                     <TouchableOpacity
                       key={provider.provider_name}

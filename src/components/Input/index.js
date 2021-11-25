@@ -9,6 +9,7 @@ const Input = ({value, setValue, placeholder, ...props}) => {
         onChangeText={setValue}
         placeholder={placeholder}
         placeholderTextColor={'#555'}
+        style={{color: '#000'}}
         {...props}
       />
     </Wrapper>

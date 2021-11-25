@@ -1,6 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {View, Text, FlatList, Image, Pressable} from 'react-native';
+import theme from '~/assets/theme';
 import {RatingStars} from '~/components';
 import {useConfiguration} from '~/hooks';
 import {fakeFeed} from './fakeFeed';
@@ -12,14 +13,22 @@ const Feed = () => {
 
   const navigation = useNavigation();
 
-  const onSelectMovie = (id) => {
+  const onSelectMovie = id => {
     navigation.navigate('Details', {movieId: id});
   };
 
   const renderItem = ({item}) => {
     return (
-      <View>
-        <Text>{item.posterName}</Text>
+      <View style={{marginVertical: 20}}>
+        <Text
+          style={{
+            color: theme.colors.text,
+            fontSize: 20,
+            fontWeight: 'bold',
+            paddingVertical: 10,
+          }}>
+          {item.posterName}
+        </Text>
         <Pressable onPress={() => onSelectMovie(item.movieId)}>
           <Image
             source={{
@@ -29,14 +38,16 @@ const Feed = () => {
           />
         </Pressable>
         <RatingStars rating={item.rating} />
-        <Text>{item.comment}</Text>
+        <Text
+          style={{color: theme.colors.text, fontSize: 20, paddingVertical: 10}}>
+          {item.comment}
+        </Text>
       </View>
     );
   };
 
   return (
     <View>
-      <Text>FEED</Text>
       <FlatList
         data={feed}
         extraData={feed}

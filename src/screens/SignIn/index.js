@@ -7,6 +7,7 @@ import Cinema from '~/assets/images/cinema.png';
 import {setIsLogged} from '~/store/ducks/app';
 import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
+import {heightPercentage} from '~/utils/responsive';
 
 const SignIn = () => {
   const navigation = useNavigation();
@@ -40,7 +41,7 @@ const SignIn = () => {
           <Image
             source={Cinema}
             style={{
-              height: 300,
+              height: heightPercentage(30),
             }}
           />
         </View>
